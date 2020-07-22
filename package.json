@@ -4,8 +4,11 @@
   "description": "A Diary app built with the MERN Stack",
   "main": "server.js",
   "scripts": {
+    "client-install": "cd client && npm i",
     "start": "node server.js",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "client": "cd client && npm start",
+    "dev" : "concurrently \"npm run server\" \" npm run client \""
   },
   "author": "Stephane Tatin",
   "license": "ISC",

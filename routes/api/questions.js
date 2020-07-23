@@ -20,7 +20,6 @@ router.get("/", (req, res) => {
 // @access Public
 router.post("/", (req, res) => {
     const newQuestion = new Question({
-        id: req.body.id,
         wording: req.body.wording
     })
 

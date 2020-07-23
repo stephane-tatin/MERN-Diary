@@ -11,7 +11,7 @@ import {
 } from "reactstrap"
 import { connect } from "react-redux"
 import { addQuestion } from "../actions/questionActions"
-import uuid from "uuid/dist/v1"
+
 
 
 class QuestionsModal extends Component {
@@ -35,7 +35,6 @@ class QuestionsModal extends Component {
      onSubmit = (e)=> {
         e.preventDefault();
         const newQuestion = {
-            id : uuid(),
             wording : this.state.wording
         }
 

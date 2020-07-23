@@ -6,10 +6,9 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink,
     Container
 } from "reactstrap"
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 
 class AppNavBar extends Component {
    
@@ -33,11 +32,14 @@ class AppNavBar extends Component {
                         <NavbarToggler onClick={this.toggle}></NavbarToggler>
                         <Collapse isOpen={true}>
                             <Nav className="ml-auto" navbar>
-                                <NavItem dark>
-                                    <NavLink href="/questionsForm">Speak about yourself</NavLink>
+                                <NavItem>
+                                    <NavLink style={{marginRight: "2rem"}} className="text-white" to="/pages">How was I feeling ?</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink href="/questionsDB" >Questions from database</NavLink>
+                                    <NavLink style={{marginRight: "2rem"}} className="text-white" to="/questionsForm">Speak about myself</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink className="text-white" to="/questionsDB">Ask questions to my future self</NavLink>
                                 </NavItem>
                             </Nav>
                         </Collapse>

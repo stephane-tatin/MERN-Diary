@@ -3,6 +3,7 @@ const mongoose = require("mongoose")
 
 const questions = require("./routes/api/questions")
 const answers = require("./routes/api/answers")
+const questionsForm = require("./routes/api/questionsForm")
 
 const app = express();
 app.use(express.json())
@@ -23,6 +24,7 @@ mongoose.connect(DB, DBOptions)
 //Use Routes
 app.use("/api/questions", questions)
 app.use("/api/answers", answers)
+app.use("/api/questionsForms", questionsForm)
 
 const port = process.env.PORT || 5000;
 

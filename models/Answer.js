@@ -10,7 +10,7 @@ const AnswerSchema = new Schema({
         required: true,
     },
     questionAnswer: {
-        type:String,
+        type: String,
         required: true,
     },
     date: {

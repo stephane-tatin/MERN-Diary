@@ -22,3 +22,9 @@
   color: #61dafb;
 }
 
+.questionCard{
+  color: gray;
+  opacity: 50;
+  margin-bottom: 2rem;
+}
+

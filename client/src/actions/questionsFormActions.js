@@ -13,14 +13,12 @@ export const getQuestionsForms = () => dispatch => {
 
 
 export const addQuestionsForm = (questionsForm) => dispatch => {
-    console.log("post")
-    console.log(questionsForm)
     axios.post("/api/questionsForms", questionsForm)
     .then(res => 
         dispatch({
             type: ADD_QUESTIONSFORM,
             payload : res.data
-        }))
+        })).catch(err => console.log(err))
 }
 
 export const deleteQuestion = (id) => dispatch => {

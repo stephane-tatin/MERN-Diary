@@ -23,8 +23,14 @@
 }
 
 .questionCard{
-  color: gray;
+  color: grey;
   opacity: 50;
-  margin-bottom: 2rem;
+  padding-top: 20px;
+  margin-top: 16px;
+}
+
+.answerCard{
+  padding-bottom: 20px;
+  
 }
 

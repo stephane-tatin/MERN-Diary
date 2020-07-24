@@ -19,7 +19,6 @@ class QuestionsForm extends Component {
     }
 
     sendForm = () => {
-        console.log(this.props)
         const { randomizedQuestions } =  this.props.question
        
         const newQuestionsForm = {

@@ -8,8 +8,6 @@ import PropTypes from "prop-types"
 class QuestionList extends Component {
 
     componentDidMount(){
-        console.log(this.props)
-        console.log(this.props.question.loaded)
         if (this.props.question.loaded == false ) {
             this.props.getQuestions()
         } else {

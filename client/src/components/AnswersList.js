@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Card, Button, CardTitle, CardText, Row, Col} from "reactstrap"
+import { Card, CardTitle, CardText, Row, Col, Container, CardHeader} from "reactstrap"
 import { connect } from "react-redux"
 import { getQuestionsForms } from "../actions/questionsFormActions"
 import PropTypes from "prop-types"
 import Moment from "react-moment"
+
 
 class AnswersList extends Component {
 
@@ -20,28 +21,37 @@ class AnswersList extends Component {
         console.log(questionsForms)
        
     
+
+  
         
         return ( 
-            <Row>
+
+      
+
+            <Container>
+            <Row sm="12">
                 {questionsForms.map((questionsForm) => (
-                     <Col sm="6">
-                        <Card>
-                            <CardTitle><Moment format="ddd DD/MM/YYYY">{questionsForm.date}</Moment></CardTitle>
-                            <CardText><small class="questionCard">{questionsForm.question1}</small></CardText>
-                            <CardText>{questionsForm.answer1}</CardText>
-                            <CardText><small class="questionCard">{questionsForm.question2}</small></CardText>
-                            <CardText>{questionsForm.answer2}</CardText>
-                            <CardText><small class="questionCard">{questionsForm.question3}</small></CardText>
-                            <CardText>{questionsForm.answer3}</CardText>
-                            <CardText><small class="questionCard">{questionsForm.question4}</small></CardText>
-                            <CardText>{questionsForm.answer4}</CardText>
-                            <CardText><small class="questionCard">{questionsForm.question5}</small></CardText>
-                            <CardText>{questionsForm.answer5}</CardText>
+                     <Col sm="4">
+                        <Card body>
+                            <CardHeader><Moment format="ddd DD/MM/YYYY">{questionsForm.date}</Moment></CardHeader>
+                            <Container style={{border:"solid light-grey 2px"}}>                             
+                                <CardText className="questionCard"><small>{questionsForm.question1}</small></CardText>
+                                <CardText className="answerCard">{questionsForm.answer1}</CardText>
+                                <CardText className="questionCard"><small>{questionsForm.question2}</small></CardText>
+                                <CardText className="answerCard">{questionsForm.answer2}</CardText>
+                                <CardText className="questionCard"><small>{questionsForm.question3}</small></CardText>
+                                <CardText className="answerCard">{questionsForm.answer3}</CardText>
+                                <CardText className="questionCard"><small>{questionsForm.question4}</small></CardText>
+                                <CardText className="answerCard">{questionsForm.answer4}</CardText>
+                                <CardText className="questionCard"><small>{questionsForm.question5}</small></CardText>
+                                <CardText className="answerCard">{questionsForm.answer5}</CardText>
+                            </Container>
                         </Card>
                     </Col>
                 ))}
               
             </Row>
+        </Container>
          );
     }
 }

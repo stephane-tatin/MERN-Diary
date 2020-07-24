@@ -21,6 +21,7 @@ export default function(state = initialState, action) {
         case ADD_QUESTIONSFORM:
             console.log("hello from reducer")
             console.log(state)
+            console.log(action.payload)
             return {
                 ...state,
                 questionsForms: [action.payload, ...state.questionsForms]

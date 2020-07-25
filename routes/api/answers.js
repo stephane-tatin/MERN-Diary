@@ -16,21 +16,6 @@ router.get("/", (req, res) => {
         })
 })
 
-// @ route POST api/answer
-// @post an answer to Database
-// @access Public
-
-// router.post("/", (req, res) => {
-//     Question.findById(req.body.idQ).
-//         then(question => {
-//             return newAnswer = new Answer({
-//                 question: question.wording,
-//                 questionAnswer: req.body.questionAnswer
-//             })
-//         }).then((newAnswer) =>  newAnswer.save())
-//         .then((newAnswer) => res.json(newAnswer))
-//         .catch(err => {console.log(err)})
-//     })
 
     router.post("/", (req, res) => {
         Question.findById(req.body.idQ).

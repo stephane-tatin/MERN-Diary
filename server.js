@@ -4,6 +4,9 @@ const mongoose = require("mongoose")
 const questions = require("./routes/api/questions")
 const answers = require("./routes/api/answers")
 const questionsForm = require("./routes/api/questionsForm")
+const users = require("./routes/api/users")
+
+
 
 const app = express();
 app.use(express.json())
@@ -25,6 +28,7 @@ mongoose.connect(DB, DBOptions)
 app.use("/api/questions", questions)
 app.use("/api/answers", answers)
 app.use("/api/questionsForms", questionsForm)
+app.use("/api/users", users)
 
 const port = process.env.PORT || 5000;
 

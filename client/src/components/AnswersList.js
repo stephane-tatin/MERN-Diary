@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardTitle, CardText, Row, Col, Container, CardHeader} from "reactstrap"
+import { Card, CardText, Row, Col, Container, CardHeader} from "reactstrap"
 import { connect } from "react-redux"
 import { getQuestionsForms } from "../actions/questionsFormActions"
 import PropTypes from "prop-types"

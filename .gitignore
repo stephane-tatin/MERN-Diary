@@ -1,2 +1,3 @@
 ./config
 ./config/key.js
+./config/default.json

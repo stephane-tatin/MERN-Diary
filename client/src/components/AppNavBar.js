@@ -9,6 +9,9 @@ import {
     Container
 } from "reactstrap"
 import { Link, NavLink } from "react-router-dom"
+import RegisterModal from "./auth/RegisterModal"
+import Logout from './auth/Logout';
+
 
 class AppNavBar extends Component {
    
@@ -40,6 +43,12 @@ class AppNavBar extends Component {
                                 </NavItem>
                                 <NavItem>
                                     <NavLink className="text-white" to="/questionsDB">Ask questions to my future self</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <RegisterModal className="text-white">Register</RegisterModal>
+                                </NavItem>
+                                <NavItem>
+                                    <Logout className="text-white">Logout</Logout>
                                 </NavItem>
                             </Nav>
                         </Collapse>

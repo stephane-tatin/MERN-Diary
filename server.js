@@ -5,20 +5,27 @@ const questions = require("./routes/api/questions")
 const answers = require("./routes/api/answers")
 const questionsForm = require("./routes/api/questionsForm")
 const users = require("./routes/api/users")
+const auth = require("./routes/api/auth") 
 
+const config = require ("config")
 
 
 const app = express();
 app.use(express.json())
 
 //DB Config
-const DB = require("./config/key").mongoURI
+const DB = config.get("mongoURI")
+
+// const DB = require("./config/key").mongoURI
 
 //Connect to Mongoo
 const DBOptions = {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }
+
+mongoose.set('useCreateIndex', true);
+
 mongoose.connect(DB, DBOptions)
     .then(()=> {
         console.log("MongoDB connected")
@@ -29,6 +36,7 @@ app.use("/api/questions", questions)
 app.use("/api/answers", answers)
 app.use("/api/questionsForms", questionsForm)
 app.use("/api/users", users)
+app.use("/api/auth", auth)
 
 const port = process.env.PORT || 5000;
 

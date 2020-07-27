@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css"
 import AppNavBar from "./components/AppNavBar"
@@ -10,12 +10,17 @@ import QuestionList from './components/QuestionList';
 import { BrowserRouter, Route } from "react-router-dom"
 import AnswersList from './components/AnswersList';
 import QuestionsFormModal from './components/QuestionsFormModal';
+import RegisterModal from "./components/auth/RegisterModal"
+import { loadUser } from "./actions/authActions"
 
 
-function App() {
+class App extends Component {
 
+  componentDidMount() {
+    store.dispatch(loadUser())
+  }
 
-
+  render(){
   return (
     <BrowserRouter>
       <Provider store={store}>
@@ -25,11 +30,13 @@ function App() {
           	<Route path="/questionsDB" component={QuestionList}></Route>
           	<Route path="/questionsDB" component={QuestionModals}></Route>
           	{/* <Route path="/questionsForm" component={QuestionsForm}></Route> */}
-			<Route path="/questionsForm" component={QuestionsFormModal}></Route>
+			      <Route path="/questionsForm" component={QuestionsFormModal}></Route>
+           
         </div>
       </Provider>
     </BrowserRouter>
   );
+}
 }
 
 export default App;

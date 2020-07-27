@@ -5,6 +5,7 @@ const router = express.Router()
 const Question = require("../../models/Question")
 const Answer = require("../../models/Answer")
 
+
 // @ route GET api/answer
 // @desc Get All answer
 // @access Public
@@ -15,6 +16,10 @@ router.get("/", (req, res) => {
             res.json(answer)
         })
 })
+
+// @ route POST api/answer
+// @post an answer to Database
+// @access Public
 
 
     router.post("/", (req, res) => {

@@ -45,7 +45,7 @@ class AppNavBar extends Component {
                                     <NavLink className="text-white" to="/questionsDB">Ask questions to my future self</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <RegisterModal className="text-white">Register</RegisterModal>
+                                    <RegisterModal></RegisterModal>
                                 </NavItem>
                                 <NavItem>
                                     <Logout className="text-white">Logout</Logout>

@@ -32,54 +32,7 @@ class RegisterModal extends Component {
          clearErrors : PropTypes.func.isRequired
      }
 
-     componentDidUpdate() {
-        console.log(this.props)
-        console.log(this.state)
-        
-        if (this.props.error !== null){
-            console.log("if statement works")
-           
-        } else {
-            console.log("not working")
-        }
-        
-        
-     }
-
-    //  componentDidUpdate(previousProps){
-   
-    //     const { error, isAuthenticated } = this.props
-
-    //     console.log(previousProps.error)
-    //     console.log(error)
-
-    //     console.log(previousProps.error == error )
-        
-       
-    //     if(error !== previousProps.error) {
-    //         //Check for register error
-    //         if(error.id === "REGISTER_FAIL") {
-    //             console.log("register failed")
-    //             this.setState({ msg: error.msg.msg })
-         
-    //         } else {
-    //             this.setState({ msg : null})
-    //         }
-    //     }
-    //     console.log(this.state)
-
-    //     if(this.state.modal){
-    //         if(isAuthenticated) {
-                
-    //             this.setState({
-    //                 modal:false
-    //             })
-    //         }
-    //     }
- 
-    //  }
-
-     toggle = (e) => {
+    toggle = (e) => {
         e.preventDefault();
         this.props.clearErrors()
          this.setState({
@@ -87,7 +40,7 @@ class RegisterModal extends Component {
          })
      }
 
-     onChange = (e) => {
+    onChange = (e) => {
          this.setState({
              [e.target.name]: e.target.value
          })
@@ -99,31 +52,35 @@ class RegisterModal extends Component {
         const newUser = {
             name,email,password
         }
-        this.props.register(newUser)
+        this.props.register(newUser) 
+    }
 
-    //     console.log(this.props)
-    //     console.log(this.props.error)
-
-    //   console.log(this.props.error[0] != null)
-    //   console.log(this.props.error != null)
-
-    //     if (this.props.error != null){
-    //         console.log("if statement works")
-            
-    //     }
-
-  
-
-    
-     }
+    componentDidUpdate(prevProps, prevState)   {
+        const { error } = this.props;
+        if(error !== prevProps.error) {
+            console.log("not equal")
+            console.log(prevProps.error)
+            console.log(error)
+            console.log(error.status)
+            if(error.status ==="REGISTER_FAIL") {
+                console.log("register failed")
+                console.log(error.msg.data.msg)
+                this.setState( {msg: error.msg.data.msg})
+                console.log(this.state)
+            }   else {
+                console.log("register not failed")
+                this.setState({ msg: null})
+            }
+        }
+    }
 
     render() { 
         return ( 
         <div>
-           <NavLink
+           <NavLink to="/registerForm"
+           className="text-white"
            onClick={this.toggle}
-           href="">
-                Register
+           >Register
            </NavLink>
             <Modal isOpen={this.state.modal}
                 toggle={this.toggle}>
@@ -171,7 +128,7 @@ class RegisterModal extends Component {
 
 const mapStateToProps = state => ({
     isAuthenticated : state.authReducer.isAuthenticated,
-    error: state.errorReducer.msg,
+    error: state.errorReducer,
 
 })
  

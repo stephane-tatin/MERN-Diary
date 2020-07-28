@@ -28,15 +28,20 @@ class QuestionsModal extends Component {
 
      onChange = (e) => {
          this.setState({
-             wording: e.target.value
+             wording: e.target.value,
+             userId : this.props.auth.user._id
          })
      }
 
      onSubmit = (e)=> {
         e.preventDefault();
         const newQuestion = {
-            wording : this.state.wording
+            wording : this.state.wording,
+            userId : this.props.auth.user._id
+
         }
+
+        console.log(newQuestion)
 
         //Add Item via Add Item Action
         this.props.addQuestion(newQuestion)
@@ -79,7 +84,8 @@ class QuestionsModal extends Component {
 }
 
 const mapStateToProps = state => ({
-    question : state.question
+    question : state.question,
+    auth : state.authReducer
 })
  
 export default connect(mapStateToProps, {addQuestion})(QuestionsModal);

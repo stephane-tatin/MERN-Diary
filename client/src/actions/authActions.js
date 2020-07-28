@@ -45,6 +45,30 @@ export const register = (newUser) => dispatch => {
         })
 }
 
+//login user
+
+export const login = (user) => dispatch => {
+    //Headers
+    const config = {
+        "Content-Type" : "application/json"
+    }
+    
+    // //Request Body
+
+
+    axios.post("/api/auth", user, config)
+        .then(res => dispatch({
+            type: LOGIN_SUCCESS,
+            payload: res.data
+        }))
+        .catch(err => {
+            dispatch(returnErrors(err.response, "LOGIN_FAIL"))
+            dispatch({
+                type: LOGIN_FAIL
+            })
+        })
+}
+
 //logout user 
 
 export const logout = () => {
@@ -58,6 +82,7 @@ export const logout = () => {
 export const tokenConfig = getState => {
         //Get Token from localStorage
         const token = getState().authReducer.token
+      
 
         // Set Headers
         const config = {
@@ -71,4 +96,28 @@ export const tokenConfig = getState => {
             config.headers["x-auth-token"] = token;
         }
         return config
+}
+
+//Setup Config /headers and token 
+
+export const tokenConfigAndUserId = getState => {
+    //Get Token from localStorage
+    const token = getState().authReducer.token
+    const userId = getState().authReducer.user._id
+  
+    console.log(userId)
+
+    // Set Headers
+    const config = {
+        headers: {
+            "Content-type" : "application/json"
+        }
+    }
+
+    // If Token, add to headers
+    if(token) {
+        config.headers["x-auth-token"] = token;
+        config.headers["userId"] = userId;
+    }
+    return config
 }

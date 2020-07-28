@@ -1,13 +1,13 @@
 const express = require("express")
 const router = express.Router()
 const auth = require("../../middleware/auth")
-// Item Model
+// Question Model
 const Question = require("../../models/Question")
 
-// @ route GET api/questions
-// @desc Get All questions
-// @access Public
-router.get("/",   (req, res) => {
+// @ route GET api/questions/all
+// @desc Get All questions from the DB (standard + all private)
+// @access Private
+router.get("/all",auth, (req, res) => {
     Question.find()
         .sort({date: -1})
         .then(questions => {
@@ -15,11 +15,40 @@ router.get("/",   (req, res) => {
         })
 })
 
+// @ route GET api/questions
+// @desc Get All questions (standard + private)
+// @access Private
+router.get("/",auth, (req, res) => {
+    console.log(req.header("userId"))
+    Question.find(
+        {$or:[{userId: req.header("x-auth-token")},{userId:"genericQuestion"}]}        
+    )
+        .sort({date: -1})
+        .then(questions => {
+            res.json(questions)
+        })
+})
+
 // @ route POST api/questions
-// @post a question to Database
-// @access Public
+// @post a private question to Database
+// @access Private
 router.post("/",auth, (req, res) => {
+  
     const newQuestion = new Question({
+        userId: req.body.userId,
+        wording: req.body.wording
+    })
+
+    newQuestion.save()
+        .then((question) => res.json(question))
+})
+
+// @ route POST api/questions
+// @post a generic question to Database
+// @access Private only through Postman
+router.post("/generic",auth, (req, res) => {
+    const newQuestion = new Question({
+        userId: "genericQuestion",
         wording: req.body.wording
     })
 

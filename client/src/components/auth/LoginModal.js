@@ -8,18 +8,18 @@ import {
     FormGroup,
     Label,
     Input,
+
     Alert
 } from "reactstrap"
-import { Link, NavLink } from "react-router-dom"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
-import { register } from "../../actions/authActions"
+import { login } from "../../actions/authActions"
 import { clearErrors } from "../../actions/errorActions"
+import { Link, NavLink } from "react-router-dom"
 
-class RegisterModal extends Component {
+class LoginModal extends Component {
     state = { 
         modal:false,
-        name:"",
         email:"",
         password:"",
         msg: null
@@ -28,7 +28,7 @@ class RegisterModal extends Component {
      static propTypes = {
          isAuthenticated : PropTypes.bool,
          error : PropTypes.object.isRequired,
-         register : PropTypes.func.isRequired,
+         login : PropTypes.func.isRequired,
          clearErrors : PropTypes.func.isRequired
      }
 
@@ -48,11 +48,11 @@ class RegisterModal extends Component {
 
      onSubmit = (e)=> {
         e.preventDefault();
-        const {name, email, password } = this.state
-        const newUser = {
-            name,email,password
+        const { email, password } = this.state
+        const user = {
+            email,password
         }
-        this.props.register(newUser) 
+        this.props.login(user) 
     }
 
     componentDidUpdate(prevProps, prevState)   {
@@ -62,13 +62,13 @@ class RegisterModal extends Component {
             console.log(prevProps.error)
             console.log(error)
             console.log(error.status)
-            if(error.status ==="REGISTER_FAIL") {
-                console.log("register failed")
+            if(error.status ==="LOGIN_FAIL") {
+                console.log("login failed")
                 console.log(error.msg.data.msg)
                 this.setState( {msg: error.msg.data.msg})
                 console.log(this.state)
             }   else {
-                console.log("register not failed")
+                console.log("login not failed")
                 this.setState({ msg: null})
             }
         }
@@ -77,27 +77,18 @@ class RegisterModal extends Component {
     render() { 
         return ( 
         <div>
-           <NavLink to="/registerForm"
+           <NavLink to="/loginForm"
            className="text-white"
-           style={{marginRight: "2rem"}}
            onClick={this.toggle}
-           >Register
+           >Login
            </NavLink>
             <Modal isOpen={this.state.modal}
                 toggle={this.toggle}>
-                <ModalHeader toggle={this.toggle}>Add to Database</ModalHeader>
+                <ModalHeader toggle={this.toggle}>Login</ModalHeader>
                 <ModalBody>
                     <Form onSubmit={this.onSubmit}>
                         <FormGroup>
                         { this.state.msg!== null  ? <Alert color="danger">{ this.state.msg} </Alert> : null} 
-                            <Label for="name">Name</Label>
-                            <Input
-                            className="mb-3"
-                            type="text"
-                            name="name"
-                            id="name"
-                            placeholder="name"
-                            onChange= {this.onChange}></Input>
                             <Label for="name">Email</Label>
                             <Input
                              className="mb-3"
@@ -117,7 +108,7 @@ class RegisterModal extends Component {
                             <Button
                             color="dark"
                             style= {{marginTop : "2rem"}}
-                            >Register</Button>
+                            >Login</Button>
                           
                         </FormGroup>
                     </Form>
@@ -133,4 +124,4 @@ const mapStateToProps = state => ({
 
 })
  
-export default connect(mapStateToProps, {register, clearErrors})(RegisterModal);
+export default connect(mapStateToProps, {login, clearErrors})(LoginModal);

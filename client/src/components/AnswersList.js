@@ -4,30 +4,35 @@ import { connect } from "react-redux"
 import { getQuestionsForms } from "../actions/questionsFormActions"
 import PropTypes from "prop-types"
 import Moment from "react-moment"
+import { Redirect } from "react-router-dom"
 
 
 class AnswersList extends Component {
 
     componentDidMount(){
-     
-    this.props.getQuestionsForms()
+        console.log(this.props)
+        if(this.props.auth.isAuthenticated === true) {
+            if (this.props.questionsForm.loaded === false ) {
+                this.props.getQuestionsForms()
+            } else {
     
+            }
+        }
+     
+        
     }
 
     state = {  }
     render() { 
-        console.log(this.props)
+     
         const { questionsForms } = this.props.questionsForm
-        console.log(questionsForms)
-       
-    
-
-  
         
-        return ( 
+        
 
-      
-
+            if (this.props.auth.isAuthenticated === false) {
+                return <Redirect to="/" />
+              } else {
+                return ( 
             <Container>
             <Row sm="12">
                 {questionsForms.map((questionsForm) => (
@@ -53,7 +58,7 @@ class AnswersList extends Component {
             </Row>
         </Container>
          );
-    }
+    }}
 }
 
 AnswersList.propTypes = {
@@ -62,7 +67,8 @@ AnswersList.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    questionsForm: state.questionsForm
+    questionsForm: state.questionsForm,
+    auth: state.authReducer
 })
  
 export default connect(mapStateToProps, {getQuestionsForms})(AnswersList);

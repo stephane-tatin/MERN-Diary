@@ -3,7 +3,6 @@ import {
     Collapse,
     Navbar,
     NavbarToggler,
-    NavbarBrand,
     Nav,
     NavItem,
     Container
@@ -64,12 +63,14 @@ class AppNavBar extends Component {
                 </NavItem>
             </Fragment>
         )
+
+        
         
         return ( 
             <div>
                 <Navbar color="dark" dark expand="sm" className="mb-5">
                     <Container>
-                        <NavLink style={{marginRight: "2rem"}} className="text-white" to="/home">My Diary</NavLink>
+                        <NavLink style={{marginRight: "2rem"}} className="text-white" to="/">My Diary</NavLink>
                         <NavbarToggler onClick={this.toggle}></NavbarToggler>
                         <Collapse isOpen={true}>
                             <Nav className="ml-auto" navbar>

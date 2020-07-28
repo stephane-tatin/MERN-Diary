@@ -10,10 +10,10 @@ import {
     Input,
     Alert
 } from "reactstrap"
-import { Link, NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
-import { register } from "../../actions/authActions"
+import { register, loadUser } from "../../actions/authActions"
 import { clearErrors } from "../../actions/errorActions"
 
 class RegisterModal extends Component {
@@ -53,6 +53,7 @@ class RegisterModal extends Component {
             name,email,password
         }
         this.props.register(newUser) 
+      
     }
 
     componentDidUpdate(prevProps, prevState)   {

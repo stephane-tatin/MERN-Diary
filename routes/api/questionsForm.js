@@ -8,7 +8,7 @@ const QuestionsForm = require("../../models/QuestionsForm")
 // @desc Get All questions
 // @access Public
 router.get("/", (req, res) => {
-    QuestionsForm.find()
+    QuestionsForm.find({userId: req.header("userId")})
         .sort({date: -1})
         .then(questionsForms => {
             res.json(questionsForms)
@@ -29,7 +29,8 @@ router.post("/", (req, res) => {
         question4: req.body.question4,
         answer4 : req.body.answer4,
         question5: req.body.question5,
-        answer5 : req.body.answer5
+        answer5 : req.body.answer5,
+        userId : req.body.userId
 
 
     })

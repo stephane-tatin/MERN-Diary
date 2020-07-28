@@ -28,10 +28,12 @@ class App extends Component {
       <Provider store={store}>
         <div className="App">
           	<AppNavBar></AppNavBar>
-            <Route path="/home" component= {HomePage}></Route>
+            <Route exact path="/" component= {HomePage}></Route>
         	  <Route path="/pages" component= {AnswersList}></Route>
+
+            <Route path="/questionsDB" component={QuestionModals}></Route>
           	<Route path="/questionsDB" component={QuestionList}></Route>
-          	<Route path="/questionsDB" component={QuestionModals}></Route>
+          	
           	<Route path="/registerForm" component={RegisterModal}></Route>
 			      <Route path="/questionsForm" component={QuestionsFormModal}></Route>
             <Route path="/loginForm" component={LoginModal}></Route>

@@ -6,12 +6,17 @@ import { addQuestionsForm } from "../actions/questionsFormActions"
 import PropTypes from "prop-types"
 
 class QuestionsForm extends Component {
+
     componentDidMount(){
+        console.log(this.props)
+        if(this.props.auth.isAuthenticated === true) {
+            if (this.props.question.loaded === false ) {
+                this.props.getQuestions()
+            } else {
     
-        if (this.props.question.loaded == false) {
-            this.props.getQuestions()
-        } else {
+            }
         }
+     
         
     }
    
@@ -51,7 +56,10 @@ class QuestionsForm extends Component {
        
         const { randomizedQuestions } = this.props.question
 
-        return ( 
+        if (this.props.auth.isAuthenticated === false) {
+            return <Redirect to="/" />
+          } else {
+            return ( 
             <Form>
                 {randomizedQuestions.map(({_id, wording, id}, index) => (
                     <FormGroup key={id}>
@@ -67,7 +75,7 @@ class QuestionsForm extends Component {
                 <Button style={{marginBottom: "2rem"}} color="dark" onClick={this.sendForm}>Share my thought</Button>
             </Form>
          );
-    }
+    }}
 }
 
 QuestionsForm.propTypes = {
@@ -77,7 +85,8 @@ QuestionsForm.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    question: state.question
+    question: state.question,
+    auth : state.quthReducer
 })
  
 export default connect(mapStateToProps, {addQuestionsForm, getQuestions})(QuestionsForm);

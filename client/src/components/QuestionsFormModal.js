@@ -14,16 +14,21 @@ import {
 import { connect } from "react-redux"
 import { getQuestions } from "../actions/questionActions"
 import { addQuestionsForm } from "../actions/questionsFormActions"
+import {Redirect } from "react-router-dom"
 
 
 class QuestionsFormModal extends Component {
 
     componentDidMount(){
+        console.log(this.props)
+        if(this.props.auth.isAuthenticated === true) {
+            if (this.props.question.loaded === false ) {
+                this.props.getQuestions()
+            } else {
     
-        if (this.props.question.loaded == false) {
-            this.props.getQuestions()
-        } else {
+            }
         }
+     
         
     }
 
@@ -48,6 +53,9 @@ class QuestionsFormModal extends Component {
     onSubmit = (e) => {
         e.preventDefault()
         const { randomizedQuestions } =  this.props.question
+        const { user } =  this.props.auth
+
+        console.log(this.props.auth.user._id)
        
         const newQuestionsForm = {
             answer1 : this.state.answer1,
@@ -59,7 +67,8 @@ class QuestionsFormModal extends Component {
             question2 : randomizedQuestions[1].wording,
             question3 : randomizedQuestions[2].wording,
             question4 : randomizedQuestions[3].wording,
-            question5 : randomizedQuestions[4].wording
+            question5 : randomizedQuestions[4].wording,
+            userId : user._id
 
         }
         console.log(newQuestionsForm)
@@ -75,6 +84,9 @@ class QuestionsFormModal extends Component {
 
         const { randomizedQuestions } = this.props.question
 
+        if (this.props.auth.isAuthenticated === false) {
+            return <Redirect to="/" />
+          } else {
         return ( 
             <Container>
                 <Button 
@@ -114,11 +126,12 @@ class QuestionsFormModal extends Component {
                 </Modal>
             </Container>
          );
-    }
+    }}
 }
 
 const mapStateToProps = state => ({
-    question : state.question
+    question : state.question,
+    auth : state.authReducer
 })
  
 export default connect(mapStateToProps, {addQuestionsForm, getQuestions})(QuestionsFormModal);

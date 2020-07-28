@@ -4,15 +4,22 @@ import { CSSTransition, TransitionGroup } from "react-transition-group"
 import { connect } from "react-redux"
 import { getQuestions, deleteQuestion } from "../actions/questionActions"
 import PropTypes from "prop-types"
+import { Redirect } from "react-router-dom"
 
 class QuestionList extends Component {
 
-    componentDidMount(){
-        if (this.props.question.loaded == false ) {
-            this.props.getQuestions()
-        } else {
+    
 
+    componentDidMount(){
+        console.log(this.props)
+        if(this.props.auth.isAuthenticated === true) {
+            if (this.props.question.loaded === false ) {
+                this.props.getQuestions()
+            } else {
+    
+            }
         }
+     
         
     }
 
@@ -24,6 +31,12 @@ class QuestionList extends Component {
     render() { 
         
         const { questions } = this.props.question
+
+        if (this.props.auth.isAuthenticated === false) {
+            return <Redirect to="/" />
+          } else {
+        
+
         return ( 
             <Container>
                 <ListGroup>
@@ -46,14 +59,17 @@ class QuestionList extends Component {
          );
     }
 }
+}
 
 QuestionList.propTypes = {
     getQuestions : PropTypes.func.isRequired,
-    question : PropTypes.object.isRequired
+    question : PropTypes.object.isRequired,
+    auth : PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-    question: state.question
+    question: state.question,
+    auth : state.authReducer
 })
  
 export default connect(mapStateToProps, {getQuestions, deleteQuestion})(QuestionList);

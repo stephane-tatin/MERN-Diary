@@ -13,9 +13,9 @@ import {
 } from "reactstrap"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
-import { login } from "../../actions/authActions"
+import { login, loadUser } from "../../actions/authActions"
 import { clearErrors } from "../../actions/errorActions"
-import { Link, NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 
 class LoginModal extends Component {
     state = { 
@@ -53,6 +53,7 @@ class LoginModal extends Component {
             email,password
         }
         this.props.login(user) 
+    
     }
 
     componentDidUpdate(prevProps, prevState)   {
@@ -124,4 +125,4 @@ const mapStateToProps = state => ({
 
 })
  
-export default connect(mapStateToProps, {login, clearErrors})(LoginModal);
+export default connect(mapStateToProps, {login, clearErrors, loadUser})(LoginModal);

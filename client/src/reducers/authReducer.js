@@ -2,7 +2,7 @@ import {USER_LOADED, USER_LOADING, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT
 
 const initialState = {
     token: localStorage.getItem("token"),
-    isAuthenticated: null,
+    isAuthenticated: false,
     isLoading:false,
     user:null
     
@@ -28,7 +28,7 @@ export default function(state = initialState, action) {
             localStorage.setItem("token", action.payload.token)
             return {
                 ...state,
-                ...action.payload,
+                user : action.payload,
                 isAuthenticated : true,
                 isLoading: false,
             }

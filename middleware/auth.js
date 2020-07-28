@@ -11,7 +11,6 @@ function auth(req, res, next) {
             msg: "No token, authorization denied"
         })
     }
-    console.log(token)
 
     try {
         //Verify Token 
@@ -27,5 +26,6 @@ function auth(req, res, next) {
     }
 
 }
+
 
 module.exports = auth

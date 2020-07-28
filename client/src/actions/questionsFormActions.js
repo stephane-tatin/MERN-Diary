@@ -1,14 +1,18 @@
 import { GET_QUESTIONSFORMS, ADD_QUESTIONSFORM, DELETE_QUESTIONSFORM, QUESTIONSFORMS_LOADING } from "./types"
 import axios from "axios"
+import { tokenConfigAndUserId } from "./authActions"
+import { returnErrors } from "./errorActions"
 
-export const getQuestionsForms = () => dispatch => {
+
+export const getQuestionsForms = () => (dispatch, getState) => {
     dispatch(setQuestionsLoading());
-    axios.get("/api/questionsForms")
+    axios.get("/api/questionsForms", tokenConfigAndUserId(getState))
     .then(res => 
         dispatch({
             type: GET_QUESTIONSFORMS,
             payload : res.data
         }))
+        .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
 }
 
 

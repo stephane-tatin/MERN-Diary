@@ -19,9 +19,8 @@ router.get("/all",auth, (req, res) => {
 // @desc Get All questions (standard + private)
 // @access Private
 router.get("/",auth, (req, res) => {
-    console.log(req.header("userId"))
     Question.find(
-        {$or:[{userId: req.header("x-auth-token")},{userId:"genericQuestion"}]}        
+        {$or:[{userId: req.header("userId")},{userId:"genericQuestion"}]}        
     )
         .sort({date: -1})
         .then(questions => {
@@ -43,10 +42,12 @@ router.post("/",auth, (req, res) => {
         .then((question) => res.json(question))
 })
 
-// @ route POST api/questions
+// @ route POST api/questions/generic
 // @post a generic question to Database
 // @access Private only through Postman
-router.post("/generic",auth, (req, res) => {
+router.post("/generic", (req, res) => {
+
+
     const newQuestion = new Question({
         userId: "genericQuestion",
         wording: req.body.wording

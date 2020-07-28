@@ -52,7 +52,6 @@ export const login = (user) => dispatch => {
     const config = {
         "Content-Type" : "application/json"
     }
-    
     // //Request Body
 
 
@@ -105,7 +104,7 @@ export const tokenConfigAndUserId = getState => {
     const token = getState().authReducer.token
     const userId = getState().authReducer.user._id
   
-    console.log(userId)
+    console.log(getState().authReducer)
 
     // Set Headers
     const config = {
@@ -119,5 +118,7 @@ export const tokenConfigAndUserId = getState => {
         config.headers["x-auth-token"] = token;
         config.headers["userId"] = userId;
     }
+
+
     return config
 }

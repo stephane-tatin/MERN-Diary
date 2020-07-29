@@ -1,6 +1,6 @@
 import axios from "axios"
 
-import {USER_LOADED, USER_LOADING, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL} from "../actions/types"
+import {USER_LOADED, USER_LOADING, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, CLEAR_QUESTIONSFORMS, CLEAR_QUESTIONS} from "../actions/types"
 
 import { returnErrors } from "./errorActions"
 
@@ -59,7 +59,7 @@ export const login = (user) => dispatch => {
         .then(res => dispatch({
             type: LOGIN_SUCCESS,
             payload: res.data
-        }))
+        })) 
         .catch(err => {
             dispatch(returnErrors(err.response, "LOGIN_FAIL"))
             dispatch({
@@ -70,10 +70,17 @@ export const login = (user) => dispatch => {
 
 //logout user 
 
-export const logout = () => {
-    return {
-        type:LOGOUT_SUCCESS
-    }
+export const logout = () => dispatch => {
+    dispatch({
+        type: LOGOUT_SUCCESS
+    })
+    dispatch({
+        type: CLEAR_QUESTIONSFORMS
+    })
+    dispatch({
+        type: CLEAR_QUESTIONS
+    })
+    window.location.reload()
 }
 
 //Setup Config /headers and token 

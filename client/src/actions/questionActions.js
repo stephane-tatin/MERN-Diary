@@ -41,7 +41,7 @@ export const deleteQuestion = (id) => (dispatch, getState) => {
             type: DELETE_QUESTION,
             payload: id
         })
-    })   .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
+    }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
 }
 
 

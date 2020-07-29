@@ -13,7 +13,7 @@ import {
 import { NavLink } from "react-router-dom"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
-import { register, loadUser } from "../../actions/authActions"
+import { register } from "../../actions/authActions"
 import { clearErrors } from "../../actions/errorActions"
 
 class RegisterModal extends Component {
@@ -59,17 +59,12 @@ class RegisterModal extends Component {
     componentDidUpdate(prevProps, prevState)   {
         const { error } = this.props;
         if(error !== prevProps.error) {
-            console.log("not equal")
-            console.log(prevProps.error)
-            console.log(error)
-            console.log(error.status)
+
             if(error.status ==="REGISTER_FAIL") {
-                console.log("register failed")
-                console.log(error.msg.data.msg)
-                this.setState( {msg: error.msg.data.msg})
-                console.log(this.state)
+                this.setState({msg: error.msg.data.msg})
+           
             }   else {
-                console.log("register not failed")
+         
                 this.setState({ msg: null})
             }
         }

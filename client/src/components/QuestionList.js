@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Container, ListGroup, ListGroupItem, Button } from "reactstrap"
+import { Container, ListGroup, ListGroupItem, Button, Fade } from "reactstrap"
 import { CSSTransition, TransitionGroup } from "react-transition-group"
 import { connect } from "react-redux"
 import { getQuestions, deleteQuestion } from "../actions/questionActions"
@@ -8,13 +8,18 @@ import { Redirect } from "react-router-dom"
 
 class QuestionList extends Component {
 
-    
+    state = {
+        fade : false
+    }
 
     componentDidMount(){
         console.log(this.props)
         if(this.props.auth.isAuthenticated === true) {
             if (this.props.question.loaded === false ) {
                 this.props.getQuestions()
+                this.setState({
+                    fade: true
+                })
             } else {
     
             }
@@ -39,22 +44,27 @@ class QuestionList extends Component {
 
         return ( 
             <Container>
-                <ListGroup>
-                    <TransitionGroup className="question-list">
-                        {questions.map(({_id, wording}) => (
-                            <CSSTransition key={_id} timeout={500} classNames="fade">
-                                <ListGroupItem>{wording}
-                                    <Button 
-                                    size="sm"
-                                    onClick={this.onDeleteClick.bind(this, _id)}
-                                    >
-                                        X
-                                    </Button>
-                                </ListGroupItem>
-                            </CSSTransition>
-                        ))}
-                    </TransitionGroup>
-                </ListGroup>
+                <Fade in={this.fade}>
+                    <ListGroup>
+                        <TransitionGroup className="question-list">
+                            {questions.map(({_id, wording, userId}) => (
+                                <CSSTransition key={_id} timeout={500} classNames="fade">
+                                    <ListGroupItem>
+                                    {wording}
+                                        {userId !== "genericQuestion" ? 
+                                            <Button 
+                                            size="sm"
+                                            onClick={this.onDeleteClick.bind(this, _id)}
+                                            >x</Button> : null }
+                                        
+                                          
+                                    </ListGroupItem>
+                              
+                                </CSSTransition>
+                            ))}
+                        </TransitionGroup>
+                    </ListGroup>
+                </Fade>
             </Container>
          );
     }

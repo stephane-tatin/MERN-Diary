@@ -19,6 +19,13 @@ router.get("/", (req, res) => {
 // @post a question to Database
 // @access Public
 router.post("/", (req, res) => {
+
+    if (!req.body.answer1 || !req.body.answer2 || !req.body.answer3 || !req.body.answer4 || !req.body.answer5 ) {
+        return res.status(400).json({
+            msg : "please fill all the fields"
+        })
+    }
+
     const newQuestionsForm = new QuestionsForm({
         question1: req.body.question1,
         answer1 : req.body.answer1,

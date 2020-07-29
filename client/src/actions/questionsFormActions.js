@@ -1,4 +1,4 @@
-import { GET_QUESTIONSFORMS, ADD_QUESTIONSFORM, DELETE_QUESTIONSFORM, QUESTIONSFORMS_LOADING } from "./types"
+import { GET_QUESTIONSFORMS, ADD_QUESTIONSFORM, DELETE_QUESTIONSFORM, QUESTIONSFORMS_LOADING, ADD_QUESTIONSFORM_ERROR } from "./types"
 import axios from "axios"
 import { tokenConfigAndUserId } from "./authActions"
 import { returnErrors } from "./errorActions"
@@ -22,7 +22,10 @@ export const addQuestionsForm = (questionsForm) => dispatch => {
         dispatch({
             type: ADD_QUESTIONSFORM,
             payload : res.data
-        })).catch(err => console.log(err))
+        })).catch(err => {
+            dispatch(returnErrors(err.response.data, "ADD_QUESTIONSFORM_ERROR"))
+            dispatch({ type : ADD_QUESTIONSFORM_ERROR})
+        })
 }
 
 export const deleteQuestion = (id) => dispatch => {

@@ -1,4 +1,4 @@
-import { GET_QUESTIONS, ADD_QUESTION, DELETE_QUESTION, QUESTIONS_LOADING} from "../actions/types"
+import { GET_QUESTIONS, ADD_QUESTION, DELETE_QUESTION, QUESTIONS_LOADING, CLEAR_QUESTIONS} from "../actions/types"
 import questionsRandomizer from "../utilities/questionsRandomizer"
 
 const initialState = {
@@ -32,6 +32,11 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 loading : true
+            }
+        case CLEAR_QUESTIONS:
+            return {
+                ...state,
+                questions : []
             }
         default:
             return state

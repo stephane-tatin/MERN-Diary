@@ -1,4 +1,4 @@
-import { GET_QUESTIONSFORMS, ADD_QUESTIONSFORM, DELETE_QUESTIONSFORM, QUESTIONSFORMS_LOADING} from "../actions/types"
+import { GET_QUESTIONSFORMS, ADD_QUESTIONSFORM, DELETE_QUESTIONSFORM, QUESTIONSFORMS_LOADING, CLEAR_QUESTIONSFORMS} from "../actions/types"
 
 const initialState = {
     questionsForms : [],
@@ -32,6 +32,11 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 loading : true
+            }
+        case CLEAR_QUESTIONSFORMS:
+            return {
+                ...state,
+                questionsForms : []
             }
         default:
             return state

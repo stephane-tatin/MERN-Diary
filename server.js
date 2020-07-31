@@ -2,13 +2,14 @@ const express = require("express")
 const mongoose = require("mongoose")
 
 const questions = require("./routes/api/questions")
-const answers = require("./routes/api/answers")
+const quotations = require("./routes/api/quotations")
 const questionsForm = require("./routes/api/questionsForm")
 const users = require("./routes/api/users")
 const auth = require("./routes/api/auth") 
 const path = require ("path")
 
 const config = require ("config")
+const Quotation = require("./models/Quotation")
 
 
 const app = express();
@@ -33,8 +34,8 @@ mongoose.connect(DB, DBOptions)
     }).catch(err=> console.log(err))
 
 //Use Routes
+app.use("/api/quotations", quotations)
 app.use("/api/questions", questions)
-app.use("/api/answers", answers)
 app.use("/api/questionsForms", questionsForm)
 app.use("/api/users", users)
 app.use("/api/auth", auth)

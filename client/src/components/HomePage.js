@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux"
-import {Fade } from "reactstrap"
+import {Fade, Jumbotron } from "reactstrap"
 import PropTypes from "prop-types"
 
 class HomePage extends Component {
@@ -31,9 +31,11 @@ class HomePage extends Component {
 
         return ( 
             <Fade in={this.fade}>
-                <div>
-                    {isAuthenticated ? `Welcome ${user.name}. This is your private place to express yourself and think about you today` : "please register or login to use your diary" }
-                </div>
+               {isAuthenticated ?  <Jumbotron>
+                <h1>Welcome {user.name}.</h1> 
+                <p>This is your private place to express yourself and think about you today</p>
+
+                </Jumbotron> : <Jumbotron>Please register or login to use your diary</Jumbotron> }
             </Fade>
    
         )}

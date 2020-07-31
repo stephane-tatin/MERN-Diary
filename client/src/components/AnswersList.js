@@ -50,12 +50,16 @@ class AnswersList extends Component {
                                     <Container style={{border:"solid light-grey 2px"}}>                             
                                         <CardText className="questionCard"><small>{questionsForm.question1}</small></CardText>
                                         <CardText className="answerCard">{questionsForm.answer1}</CardText>
+                                        <hr></hr>
                                         <CardText className="questionCard"><small>{questionsForm.question2}</small></CardText>
                                         <CardText className="answerCard">{questionsForm.answer2}</CardText>
+                                        <hr></hr>
                                         <CardText className="questionCard"><small>{questionsForm.question3}</small></CardText>
                                         <CardText className="answerCard">{questionsForm.answer3}</CardText>
+                                        <hr></hr>
                                         <CardText className="questionCard"><small>{questionsForm.question4}</small></CardText>
                                         <CardText className="answerCard">{questionsForm.answer4}</CardText>
+                                        <hr></hr>
                                         <CardText className="questionCard"><small>{questionsForm.question5}</small></CardText>
                                         <CardText className="answerCard">{questionsForm.answer5}</CardText>
                                     </Container>

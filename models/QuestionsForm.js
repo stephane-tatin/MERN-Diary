@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
-const Anwser = require("./Answer")
+const Anwser = require("./Quotation")
 const Question = require("./Question")
 
 //Create Schema

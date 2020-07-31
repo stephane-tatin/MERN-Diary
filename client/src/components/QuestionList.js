@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Container, ListGroup, ListGroupItem, Button, Fade } from "reactstrap"
-import { CSSTransition, TransitionGroup } from "react-transition-group"
+
 import { connect } from "react-redux"
 import { getQuestions, deleteQuestion } from "../actions/questionActions"
 import PropTypes from "prop-types"
@@ -46,9 +46,9 @@ class QuestionList extends Component {
             <Container>
                 <Fade in={this.fade}>
                     <ListGroup>
-                        <TransitionGroup className="question-list">
+                        
                             {questions.map(({_id, wording, userId}) => (
-                                <CSSTransition key={_id} timeout={500} classNames="fade">
+                               
                                     <ListGroupItem>
                                     {wording}
                                         {userId !== "genericQuestion" ? 
@@ -60,9 +60,9 @@ class QuestionList extends Component {
                                           
                                     </ListGroupItem>
                               
-                                </CSSTransition>
+                            
                             ))}
-                        </TransitionGroup>
+                       
                     </ListGroup>
                 </Fade>
             </Container>

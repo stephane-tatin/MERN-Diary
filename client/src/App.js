@@ -37,6 +37,7 @@ class App extends Component {
           	<Route path="/registerForm" component={RegisterModal}></Route>
 			      <Route path="/questionsForm" component={QuestionsFormModal}></Route>
             <Route path="/loginForm" component={LoginModal}></Route>
+            
 
            
         </div>

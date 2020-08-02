@@ -43,14 +43,10 @@ class QuestionsModal extends Component {
 
      onSubmit = (e)=> {
         e.preventDefault();
-        console.log(this.props.auth.user)
-        console.log(this.props.auth.user.id)
         const newQuestion = {
             wording : this.state.wording,
             userId : this.props.auth.user._id
         }
-
-        console.log(newQuestion)
 
         //Add Item via Add Item Action
         this.props.addQuestion(newQuestion)

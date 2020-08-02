@@ -1,6 +1,6 @@
-import { GET_QUESTIONSFORMS, ADD_QUESTIONSFORM, DELETE_QUESTIONSFORM, QUESTIONSFORMS_LOADING, ADD_QUESTIONSFORM_ERROR } from "./types"
+import { GET_QUESTIONSFORMS, ADD_QUESTIONSFORM, DELETE_QUESTIONSFORM, QUESTIONSFORMS_LOADING, ADD_QUESTIONSFORM_ERROR,CLEAR_QUESTIONSFORMS } from "./types"
 import axios from "axios"
-import { tokenConfigAndUserId } from "./authActions"
+import { tokenConfig, tokenConfigAndUserId } from "./authActions"
 import { returnErrors } from "./errorActions"
 
 
@@ -16,20 +16,24 @@ export const getQuestionsForms = () => (dispatch, getState) => {
 }
 
 
-export const addQuestionsForm = (questionsForm) => dispatch => {
-    axios.post("/api/questionsForms", questionsForm)
+export const addQuestionsForm = (questionsForm) => (dispatch, getState) => {
+    axios.post("/api/questionsForms", questionsForm, tokenConfig(getState))
     .then(res => 
         dispatch({
             type: ADD_QUESTIONSFORM,
             payload : res.data
-        })).catch(err => {
+        })).then(() => {
+            dispatch({
+                type: CLEAR_QUESTIONSFORMS
+            })
+        }).catch(err => {
             dispatch(returnErrors(err.response.data, "ADD_QUESTIONSFORM_ERROR"))
             dispatch({ type : ADD_QUESTIONSFORM_ERROR})
         })
 }
 
-export const deleteQuestion = (id) => dispatch => {
-    axios.delete(`/api/questions/${id}`)
+export const deleteQuestion = (id) => (dispatch, getState) => {
+    axios.delete(`/api/questions/${id}`, tokenConfig(getState))
     .then((res) => {
         dispatch({
             type: DELETE_QUESTIONSFORM,
@@ -43,5 +47,11 @@ export const deleteQuestion = (id) => dispatch => {
 export const setQuestionsLoading = () => {
     return{
         type: QUESTIONSFORMS_LOADING,
+    }
+}
+
+export const clearQuestionsForm = () => {
+    return{
+        type: CLEAR_QUESTIONSFORMS,
     }
 }

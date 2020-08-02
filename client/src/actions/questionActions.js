@@ -32,6 +32,9 @@ export const addQuestion = (question) => (dispatch, getState) => {
             type: ADD_QUESTION,
             payload : res.data
         }))
+    .then(() => {
+        
+    })
 }
 
 export const deleteQuestion = (id) => (dispatch, getState) => {

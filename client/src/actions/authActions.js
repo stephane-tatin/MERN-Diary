@@ -30,8 +30,6 @@ export const register = (newUser) => dispatch => {
     }
     
     // //Request Body
-
-
     axios.post("/api/users", newUser, config)
         .then(res => dispatch({
             type: REGISTER_SUCCESS,

@@ -8,7 +8,7 @@ import PropTypes from "prop-types"
 class QuestionsForm extends Component {
 
     componentDidMount(){
-        console.log(this.props)
+
         if(this.props.auth.isAuthenticated === true) {
             if (this.props.question.loaded === false ) {
                 this.props.getQuestions()
@@ -40,8 +40,6 @@ class QuestionsForm extends Component {
             question5 : randomizedQuestions[4].wording
 
         }
-        console.log(newQuestionsForm)
-        console.log(this.props)
         this.props.addQuestionsForm(newQuestionsForm)
     }
 
@@ -73,7 +71,7 @@ class QuestionsForm extends Component {
                         
                     </FormGroup>
                 ))}
-                <Button style={{marginBottom: "2rem"}} color="dark" onClick={this.sendForm}>Share my thought</Button>
+                <Button style={{marginBottom: "2rem"}} color="dark" onClick={this.sendForm}>Is this the wrong one ?</Button>
             </Form>
          );
     }}

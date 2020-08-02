@@ -12,7 +12,6 @@ const User = require("../../models/User")
 // @desc Get user data
 // @Private
 router.get("/user",auth, (req, res) => {
-  
     User.findById(req.user.id)
        .select("-password")
     .then((user) => {
@@ -76,9 +75,6 @@ router.post("/", (req, res) => {
         })
 
        })
-
-
-
 
 
 // @ route DELETE api/questions

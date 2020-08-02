@@ -8,7 +8,6 @@ import {
     FormGroup,
     Label,
     Input,
-
     Alert
 } from "reactstrap"
 import { connect } from "react-redux"
@@ -31,6 +30,7 @@ class LoginModal extends Component {
          login : PropTypes.func.isRequired,
          clearErrors : PropTypes.func.isRequired
      }
+
 
     toggle = (e) => {
         e.preventDefault();
@@ -59,17 +59,10 @@ class LoginModal extends Component {
     componentDidUpdate(prevProps, prevState)   {
         const { error } = this.props;
         if(error !== prevProps.error) {
-            console.log("not equal")
-            console.log(prevProps.error)
-            console.log(error)
-            console.log(error.status)
-            if(error.status ==="LOGIN_FAIL") {
-                console.log("login failed")
-                console.log(error.msg.data.msg)
+            if(error.status ==="LOGIN_FAIL") {      
                 this.setState( {msg: error.msg.data.msg})
-                console.log(this.state)
-            }   else {
-                console.log("login not failed")
+               }   else {
+ 
                 this.setState({ msg: null})
             }
         }
@@ -78,7 +71,7 @@ class LoginModal extends Component {
     render() { 
         return ( 
         <div>
-           <NavLink to="/loginForm"
+           <NavLink to="/"
            className="text-white"
            onClick={this.toggle}
            >Login
@@ -121,7 +114,7 @@ class LoginModal extends Component {
 
 const mapStateToProps = state => ({
     isAuthenticated : state.authReducer.isAuthenticated,
-    error: state.errorReducer,
+    error: state.errorReducer
 
 })
  

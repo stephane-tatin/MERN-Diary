@@ -21,12 +21,9 @@ export default function(state = initialState, action) {
                 questions : state.questions.filter(question => question._id !== action.payload)
             }
         case ADD_QUESTIONSFORM:
-            console.log("hello from reducer")
-            console.log(state)
-            console.log(action.payload)
             return {
                 ...state,
-                questionsForms: [action.payload, ...state.questionsForms]
+                questionsForms: [action.payload, ...state.questionsForms]                
             }
         case QUESTIONSFORMS_LOADING:
             return {

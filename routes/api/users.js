@@ -20,7 +20,7 @@ router.get("/", (req, res) => {
         })
 })
 
-// @ route POST api/user
+// @ route POST api/users
 // @post an answer to Database
 // @access Public
 
@@ -31,8 +31,6 @@ router.post("/", (req, res) => {
         email,
         password
     } = req.body
-
-    console.log(req.body)
 
     if (!name || !email || !password) {
         return res.status(400).json({
@@ -86,25 +84,6 @@ router.post("/", (req, res) => {
                 .catch(err => console.log(err))
         })
     })
-})
-
-
-
-
-
-// @ route DELETE api/questions
-// @delete a question from Database
-// @access Public
-router.delete("/:id", (req, res) => {
-    User.findById(req.params.id)
-        .then(user => {
-            user.remove()
-        }).then(() => res.json({
-            success: true
-        }))
-        .catch(err => res.status(404).json({
-            success: false
-        }))
 })
 
 module.exports = router

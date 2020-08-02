@@ -14,7 +14,7 @@ import {
 } from "reactstrap"
 import { connect } from "react-redux"
 import { getQuestions } from "../actions/questionActions"
-import { addQuestionsForm } from "../actions/questionsFormActions"
+import { addQuestionsForm, clearQuestionsForm } from "../actions/questionsFormActions"
 import { getQuotations } from "../actions/quotationsAction"
 import {Redirect } from "react-router-dom"
 
@@ -32,7 +32,7 @@ class QuestionsFormModal extends Component {
 
     componentDidMount() {
         if (this.props.auth.isAuthenticated === true) {
-            if (this.props.question.loaded === false) {
+            if (this.props.question.loaded === false || this.props.quotation.loaded === false) {
                 this.props.getQuestions()
                 this.props.getQuotations()
                 this.setState({
@@ -49,8 +49,9 @@ class QuestionsFormModal extends Component {
         } = this.props;
 
 
-        if (questionsForm !== prevProps.questionsForm) {
-            this.toggle()
+        if (questionsForm !== prevProps.questionsForm  ) {
+       
+            this.toggleQuotation()
         }
 
         if (error !== prevProps.error) {
@@ -117,32 +118,13 @@ class QuestionsFormModal extends Component {
             userId: user._id
         }
 
-        function isEmpty(obj) {
-            for(var key in obj) {
-                if(obj.hasOwnProperty(key))
-                    return false;
-            }
-            return true;
-        }
-
         this.props.addQuestionsForm(newQuestionsForm)
 
-        console.log(this.state)
-        
-
-        if (isEmpty(this.props.error.msg)) {
-            console.log(this.state)
-            this.toggleQuotation()
-            console.log(this.state)
-        } else {
-            this.setState({
-                msg: this.props.error.msg.msg
-                
-            })
-      
+        if (this.state.msg === null) {
+            this.toggle()
         }
-
    
+          
     }
 
 
@@ -150,7 +132,7 @@ class QuestionsFormModal extends Component {
 
         const { randomizedQuestions } = this.props.question
         const { quotations } = this.props.quotation
-        const singleQuotation = quotations[Math.round(Math.random()* quotations.length)]
+        const singleQuotation = quotations[Math.round(Math.random()* quotations.length-1)]
 
         if (this.props.auth.isAuthenticated === false) {
             return <Redirect to="/" />
@@ -222,5 +204,5 @@ const mapStateToProps = state => ({
     quotation : state.quotation
 })
  
-export default connect(mapStateToProps, {addQuestionsForm, getQuestions, getQuotations})(QuestionsFormModal);
+export default connect(mapStateToProps, {addQuestionsForm, clearQuestionsForm,  getQuestions, getQuotations})(QuestionsFormModal);
 

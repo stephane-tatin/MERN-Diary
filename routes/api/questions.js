@@ -59,7 +59,7 @@ router.post("/generic", (req, res) => {
 
 // @ route DELETE api/questions
 // @delete a question from Database
-// @access Public
+// @access Private
 router.delete("/:id", auth, (req, res) => {
     Question.findById(req.params.id)
         .then(question => {

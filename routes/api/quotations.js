@@ -30,8 +30,8 @@ router.get("/", (req, res) => {
             .catch(err => {console.log(err)})
         })
 
-// @ route DELETE api/questions
-// @delete a question from Database
+// @ route DELETE api/quotations
+// @delete a quotation from Database
 // @access Public
 router.delete("/:id", (req, res) => {
     Quotation.findById(req.params.id)

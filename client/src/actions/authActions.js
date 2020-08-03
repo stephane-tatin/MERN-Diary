@@ -109,7 +109,6 @@ export const tokenConfigAndUserId = getState => {
     const token = getState().authReducer.token
     const userId = getState().authReducer.user._id
   
-    console.log(getState().authReducer)
 
     // Set Headers
     const config = {

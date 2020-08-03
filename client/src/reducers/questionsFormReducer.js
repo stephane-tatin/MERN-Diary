@@ -3,7 +3,8 @@ import { GET_QUESTIONSFORMS, ADD_QUESTIONSFORM, DELETE_QUESTIONSFORM, QUESTIONSF
 const initialState = {
     questionsForms : [],
     loading : false,
-    loaded: false
+    loaded: false,
+    sent : false
 }
 
 export default function(state = initialState, action) {
@@ -23,7 +24,8 @@ export default function(state = initialState, action) {
         case ADD_QUESTIONSFORM:
             return {
                 ...state,
-                questionsForms: [action.payload, ...state.questionsForms]                
+                questionsForms: [action.payload, ...state.questionsForms],
+                sent : true           
             }
         case QUESTIONSFORMS_LOADING:
             return {
@@ -33,7 +35,7 @@ export default function(state = initialState, action) {
         case CLEAR_QUESTIONSFORMS:
             return {
                 ...state,
-                questionsForms : []
+                sent: false
             }
         default:
             return state

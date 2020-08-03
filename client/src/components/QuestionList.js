@@ -13,15 +13,12 @@ class QuestionList extends Component {
     }
 
     componentDidMount(){
-        console.log(this.props)
         if(this.props.auth.isAuthenticated === true) {
             if (this.props.question.loaded === false ) {
                 this.props.getQuestions()
                 this.setState({
                     fade: true
                 })
-            } else {
-    
             }
         }
      
@@ -46,10 +43,8 @@ class QuestionList extends Component {
             <Container>
                 <Fade in={this.fade}>
                     <ListGroup>
-                        
-                            {questions.map(({_id, wording, userId}) => (
-                               
-                                    <ListGroupItem>
+                        {questions.map(({_id, wording, userId}) => (
+                        <ListGroupItem key={_id}>
                                     {wording}
                                         {userId !== "genericQuestion" ? 
                                             <Button 

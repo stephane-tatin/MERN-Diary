@@ -22,11 +22,7 @@ export const addQuestionsForm = (questionsForm) => (dispatch, getState) => {
         dispatch({
             type: ADD_QUESTIONSFORM,
             payload : res.data
-        })).then(() => {
-            dispatch({
-                type: CLEAR_QUESTIONSFORMS
-            })
-        }).catch(err => {
+        })).catch(err => {
             dispatch(returnErrors(err.response.data, "ADD_QUESTIONSFORM_ERROR"))
             dispatch({ type : ADD_QUESTIONSFORM_ERROR})
         })

@@ -10,7 +10,7 @@ import {
     Input,
     Container,
     Fade,
-    Alert
+    Alert,
 } from "reactstrap"
 import { connect } from "react-redux"
 import { getQuestions } from "../actions/questionActions"
@@ -23,7 +23,7 @@ import {Redirect } from "react-router-dom"
 class QuestionsFormModal extends Component {
 
     state = {
-        fade: false,
+        fade: true,
         msg: null,
         modal: false,
         modalQuotation: false,
@@ -42,17 +42,33 @@ class QuestionsFormModal extends Component {
         }
     }
 
+    
+
     componentDidUpdate(prevProps, prevState) {
         const {
-            error,
-            questionsForm
+            error
         } = this.props;
 
-
-        if (questionsForm !== prevProps.questionsForm  ) {
-       
+        if (this.props.questionsForm.sent !== prevProps.questionsForm.sent && this.props.questionsForm.sent === true) {
+            this.toggle()
             this.toggleQuotation()
+            this.setState({
+                answer1: null,
+                answer2: null,
+                answer3: null,
+                answer4: null,
+                answer5: null,
+                question1: null,
+                question2: null,
+                question3: null,
+                question4: null,
+                question5: null,
+                userId: null,
+            })
+            this.props.clearQuestionsForm()
+            
         }
+
 
         if (error !== prevProps.error) {
             if (error.status === "ADD_QUESTIONSFORM_ERROR") {
@@ -67,27 +83,29 @@ class QuestionsFormModal extends Component {
         }
     }
 
-    toggle = () => {
-        console.log("toggle called ", !this.state.modal)
-   
-        
+    toggle = () => {     
         this.setState({
             modal: !this.state.modal,
             msg: null
         })
    }
 
-    toggleQuotation = () => {
-        console.log("togglequotation called ", !this.state.modalQuotation)
-     
-        this.setState({
-            modalQuotation: !this.state.modalQuotation,
-            msg: null
-        })
+   toggleQuotation = () => {    
+    this.setState({
+        modalQuotation: !this.state.modalQuotation,
+        msg: null
+    })     
+}
 
-        console.log(this.props.quotations)
-      
+    keyPressed = (event) => {
+        event.preventDefault()
+        if (event.key === "Enter" && this.state.modalQuotation === true) {
+            this.setState({
+                modalQuotation : false
+            })
+        }
     }
+
 
     onChange = (e) => {
         this.setState({
@@ -119,10 +137,6 @@ class QuestionsFormModal extends Component {
         }
 
         this.props.addQuestionsForm(newQuestionsForm)
-
-        if (this.state.msg === null) {
-            this.toggle()
-        }
    
           
     }
@@ -132,15 +146,16 @@ class QuestionsFormModal extends Component {
 
         const { randomizedQuestions } = this.props.question
         const { quotations } = this.props.quotation
-        const singleQuotation = quotations[Math.round(Math.random()* quotations.length-1)]
+        const singleQuotation = quotations[Math.floor(Math.random()* quotations.length)]
 
         if (this.props.auth.isAuthenticated === false) {
             return <Redirect to="/" />
           } else {
             return ( 
-                <Container>
-                    <Fade>
+                <Container onKeyPress={this.keyPressed}>
+                    <Fade in={this.state.fade}>
                         <Button 
+                        type="button"
                         color="dark"
                         style= {{marginBottom: "2rem"}}
                         onClick={this.toggle}>
@@ -164,7 +179,7 @@ class QuestionsFormModal extends Component {
                                                 id="answer"
                                                 placeholder=""
                                                 onChange={ this.onChange }
-                                                >Question</Input>
+                                                ></Input>
                                             </FormGroup>
                                         ))}
                                     
@@ -178,16 +193,11 @@ class QuestionsFormModal extends Component {
                         </Modal>
                     </Fade>
                     <Fade>
-                        <Modal isOpen={this.state.modalQuotation}
-                            toggle={this.toggleQuotation}>
-                            <ModalHeader toggle={this.toggleQuotation}>Quotation of the day</ModalHeader>
+                        <Modal isOpen={this.state.modalQuotation} toggle={this.toggleQuotation} onClick={this.toggleQuotation} onKeyPress={this.keyPressed}>
+                            <ModalHeader>Quotation of the day</ModalHeader>
                             <ModalBody>
-                                <Form onClick={this.toggleQuotation}>
-                                    <FormGroup>
-                                        <div>{singleQuotation ? singleQuotation.quotation : null }</div>
-                                        <div style={{fontStyle:"italic"}}>{singleQuotation ? singleQuotation.author : null }</div>
-                                    </FormGroup>
-                                </Form>
+                                <div>{singleQuotation ? singleQuotation.quotation : null }</div>
+                                <div style={{fontStyle:"italic"}}>{singleQuotation ? singleQuotation.author : null }</div>
                             </ModalBody>
                         </Modal>
                     </Fade>

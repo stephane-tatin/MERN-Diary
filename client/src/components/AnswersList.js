@@ -36,13 +36,13 @@ class AnswersList extends Component {
 
     render() { 
      
-        const { questionsForms } = this.props.questionsForm
+        const { questionsForms, loading } = this.props.questionsForm
         
         
 
             if (this.props.auth.isAuthenticated === false) {
                 return <Redirect to="/" />
-              } else if (questionsForms.length === 0) {
+              } else if (questionsForms.length === 0 && !loading) {
                 return <Fade in={this.fade}><Jumbotron>You have no entries yet</Jumbotron></Fade>
               }else {
                 return ( 

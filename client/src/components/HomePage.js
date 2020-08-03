@@ -37,8 +37,7 @@ class HomePage extends Component {
             <Fade in={this.fade}>
                {isAuthenticated ?  <Jumbotron>
                 <h1>Welcome {user.name}.</h1> 
-                <p>This is your private place to express yourself. You will be asked <NavLink to="/questionsForm">5 random questions</NavLink> as a base to express yourself and will be rewarded by a quotations from a famous man. You may add your own questions to the <NavLink to="/questionsDB">database</NavLink> and take a look at <NavLink to="/pages">your previous entries</NavLink></p>
-
+                <p>You can <NavLink to="/questionsForm" className="text-muted">add an entry</NavLink> to your personal diary by answering randomised questions, take a look at <NavLink to="/pages" className="text-muted">your previous entries</NavLink> or <NavLink to="/questionsDB" className="text-muted">add questions</NavLink> to the database</p>
                 </Jumbotron> : <Jumbotron>Please register or login to use your diary</Jumbotron> }
             </Fade>
    

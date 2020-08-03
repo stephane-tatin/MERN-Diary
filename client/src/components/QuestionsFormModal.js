@@ -98,8 +98,9 @@ class QuestionsFormModal extends Component {
 }
 
     keyPressed = (event) => {
-        event.preventDefault()
+        
         if (event.key === "Enter" && this.state.modalQuotation === true) {
+            event.preventDefault()
             this.setState({
                 modalQuotation : false
             })

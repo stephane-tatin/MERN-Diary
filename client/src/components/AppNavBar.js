@@ -4,7 +4,9 @@ import {
     Navbar,
     Nav,
     NavItem,
-    Container
+    Container,
+    NavbarBrand,
+    NavbarToggler
 } from "reactstrap"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
@@ -38,16 +40,16 @@ class AppNavBar extends Component {
         const authLinks = (
             <Fragment>  
                 <NavItem>
-                    <NavLink style={{marginRight: "2rem", justifyContent:"center"}} className="text-white" to="/pages">How was I feeling ?</NavLink>
+                    <NavLink style={{marginRight: "2rem", float: "left"}} className="text-white nav-link" to="/pages">How was I feeling ?</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink style={{marginRight: "2rem"}} className="text-white" to="/questionsForm">Speak about myself</NavLink>
+                    <NavLink style={{marginRight: "2rem" , float: "left"}} className="text-white nav-link" to="/questionsForm">Speak about myself</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink style={{marginRight: "2rem"}} className="text-white" to="/questionsDB">Ask questions to my future self</NavLink>
+                    <NavLink style={{marginRight: "2rem" , float: "left"}} className="text-white nav-link" to="/questionsDB">Ask questions to my future self</NavLink>
                 </NavItem>
                 <NavItem>
-                    <Logout className="text-white">Logout</Logout>
+                    <Logout>Logout</Logout>
                 </NavItem>
             </Fragment>
         )
@@ -68,11 +70,12 @@ class AppNavBar extends Component {
         return ( 
             <div>
             
-                <Navbar color="dark" dark expand="sm" className="mb-5">
+                <Navbar color="dark" dark expand="md" className="mb-5">
                     <Container>
-                        <NavLink style={{marginRight: "2rem"}} className="text-white" to="/">My Diary</NavLink>
-                        {/* <NavbarToggler onClick={this.toggle}></NavbarToggler> */}
-                        <Collapse isOpen={true}>
+                        <NavbarBrand style={{marginRight: "2rem"}} className="text-white" to="/">My Diary</NavbarBrand>
+                        <NavbarToggler onClick={this.toggle}/>
+                        
+                        <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="ml-auto" navbar>
                               
                                 {isAuthenticated ? authLinks : guestLinks}

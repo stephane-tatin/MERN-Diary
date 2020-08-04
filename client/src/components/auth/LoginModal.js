@@ -72,7 +72,8 @@ class LoginModal extends Component {
         return ( 
         <div>
            <NavLink to="/"
-           className="text-white"
+           style={{marginRight: "2rem" , float: "left"}} 
+           className="text-white nav-link"
            onClick={this.toggle}
            >Login
            </NavLink>

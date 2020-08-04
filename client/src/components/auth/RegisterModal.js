@@ -74,8 +74,8 @@ class RegisterModal extends Component {
         return ( 
         <div>
            <NavLink to="/registerForm"
-           className="text-white"
-           style={{marginRight: "2rem"}}
+           style={{marginRight: "2rem" , float: "left"}} 
+           className="text-white nav-link"
            onClick={this.toggle}
            >Register
            </NavLink>

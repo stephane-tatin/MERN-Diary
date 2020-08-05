@@ -1,7 +1,5 @@
-./config
-./config/key.js
-./config/default.json
-./node_modules
+config/
+node_modules/
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/node,react,visualstudio,visualstudiocode

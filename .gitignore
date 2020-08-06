@@ -1,9 +1,4 @@
-config/
-config
-node_modules/
-node_modules
-client/node_modules
-client/node_modules/
+
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/node,react,visualstudio,visualstudiocode

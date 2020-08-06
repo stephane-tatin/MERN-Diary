@@ -8,8 +8,10 @@ const users = require("./routes/api/users")
 const auth = require("./routes/api/auth") 
 const path = require ("path")
 
+
+// importing config for DB URI
 const config = require ("config")
-const Quotation = require("./models/Quotation")
+
 
 
 const app = express();
